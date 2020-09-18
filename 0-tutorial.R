@@ -44,7 +44,14 @@ for(even.number in seq(from=2, to=20, by=2)){
 
 # hint: two helpful functions will be paste() and the modulus %% operator.
 
-# ANSWER NEEDED HERE.
+for(i in 1:100){
+  if(i %% 5 == 0){
+    print(paste(i, "is divisible by 5"))
+  }
+  if(i %% 5 != 0){
+    print(paste(i, "is not divisible by 5"))
+  }
+}
 
 # another thing that we sometimes want to do with a for loop is to store the results
 # of the loop in a data structure. the following code creates an array and puts a random
@@ -62,7 +69,10 @@ for(i in 1:100){
 # the first element in the array would be the average of random.numbers[1:3], the second would
 # be the average of random.numbers[2:4], and so on.
 
-# ANSWER NEEDED HERE
+running.average <- numeric()
+for(i in 2:(length(random.numbers)-1)){
+  running.average[i-1] <- mean(random.numbers[(i-1):(i+1)])
+}
 
 # while loops ####
 
@@ -89,7 +99,13 @@ print(num_loops)
 # write a while loop that generates three random integers between 1 and 6, and stops
 # when they are all the same number. count the number of loops that it takes.
 
-# ANSWER NEEDED HERE
+numbers <- sample(1:6, 3, replace=T) # generate three random numbers
+num_loops <- 0
+while(numbers[1] != numbers[2] || numbers[2] != numbers[3]){
+  numbers <- sample(1:6, 3, replace=T)
+  num_loops <- num_loops + 1
+}
+print(num_loops)
 
 # replicate ####
 
@@ -102,7 +118,7 @@ print(num_loops)
 # equal probability of generating each integer between 1 and 6).
 
 dice.roll <- function(){
- # fill in this function
+  return(sum(sample(1:6, 2, replace=T)))
 }
 
 # we can use replicate to simulate rolling a pair of dice thousands of times and observing
@@ -113,7 +129,8 @@ roll.results <- replicate(10000, dice.roll())
 # the actual probability of getting a 2 is 1/36. can you determine what proportion of the
 # simulated rolls are 2? how close is it to 1/36?
 
-# ANSWER NEEDED HERE #
+sum(roll.results == 2) / length(roll.results)
+1 / 36
 
 # hist ####
 
@@ -154,7 +171,8 @@ m <- matrix(1:10, nrow=2)
 # 1 2 3 4 5
 # 6 7 8 9 10
 
-# ANSWER NEEDED HERE.
+m <- matrix(1:10, nrow=2, byrow=T)
+m
 
 # to extract values from the matrix, we use the same array brackets as before []. 
 # but, we can specify both dimensions. for example,
@@ -173,7 +191,8 @@ m[, column] # extract the entire column
 # of the matrix and calculate the sum of all the values in that row.
 # hint: no loops are necessary! check out the size and replace arguments of sample (?sample). 
 
-# ANSWER NEEDED HERE.
+random.matrix <- matrix(sample(1:4, size=100, replace=T),nrow=10)
+sum(random.matrix[2,])
 
 # finally, you can also extract just a piece of a matrix.
 
@@ -186,7 +205,7 @@ three.by.three <- five.by.five[1:3, 2:4]
 # write code to extract a 2x2 matrix, containing just the EVEN columns and rows of the
 # five.by.five matrix. hint: use c() to create lists of non-consecutive integers.
 
-# ANSWER NEEDED HERE
+five.by.five[c(2,4), c(2,4)]
 
 # max(), min(), which(), and sample() ####
 
@@ -215,4 +234,6 @@ print(random.order)
 # an array containing the integers 1-50 in a random order, and find the LOCATION of the minimum
 # and maximum values in the array.
 
-# ANSWER NEEDED HERE.
+array.search <- sample(1:50)
+which(array.search == min(array.search))
+which(array.search == max(array.search))

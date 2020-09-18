@@ -7,12 +7,15 @@ temptation.to.defect <- 3
 hurt.of.defection <- -1
 cost.of.being.punished <- -9
 cost.of.punishing <- -2
-cost.of.being.punished.for.not.punishing <- -9
-cost.of.punishing.for.not.punishing <- -2
+cost.of.being.punished.for.not.punishing <- 0
+cost.of.punishing.for.not.punishing <- 0
+
+law.punishment <- -100
+law.prob <- 0.01
 
 population.size <- 20
 chances.to.defect.per.round <- 4
-number.of.generations <- 100 
+number.of.generations <- 1000
 mutation.probability <- 0.01
 
 # create an initial population
@@ -64,6 +67,11 @@ one.round <- function(players){
         rewards[p] <- rewards[p] + temptation.to.defect
         # everyone else gets hurt by defection
         rewards[-p] <- rewards[-p] + hurt.of.defection
+        
+        # check if player is caught by law enforcement
+        if(runif(1,0,1) <= law.prob){
+          rewards[p] <- rewards[p] + law.punishment
+        }
         
         # all other players now have a chance to observe the defection and punish
         for(o in (1:population.size)[-p]){
