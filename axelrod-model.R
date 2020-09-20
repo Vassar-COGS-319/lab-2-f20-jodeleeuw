@@ -11,7 +11,7 @@ cost.of.being.punished.for.not.punishing <- 0
 cost.of.punishing.for.not.punishing <- 0
 
 law.punishment <- -100
-law.prob <- 0.01
+law.prob <- 0.015
 
 population.size <- 20
 chances.to.defect.per.round <- 4
